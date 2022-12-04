@@ -1,7 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:movie_app/provider/movie_provider.dart';
 import 'package:movie_app/screens/home_page.dart';
-import 'package:movie_app/screens/youtube_page.dart';
+
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -16,13 +18,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveSizer(
       builder: (BuildContext, Orientation, ScreenType) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'TMDB Movie App',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
+        return MultiProvider(
+          providers: [
+            ChangeNotifierProvider<MovieProvider>(
+              create: (context) => MovieProvider(),
+            )
+          ],
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'TMDB Movie App',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+            home: const MyHomePage(title: ""),
           ),
-          home: const MyHomePage(title: ""),
         );
       },
     );
@@ -47,50 +56,76 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  final List<Widget> screens = [const HomePage(), YoutubePlayPage()];
+  final List<Widget> screens = [const HomePage()];
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       body: screens[selectedIndex],
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-          colors: [Color(0xff09FACA).withOpacity(0.8), Colors.black],
-          begin: Alignment.topLeft,
-          end: Alignment.topRight,
-          // stops: [0.0, 0.8],
-          //tileMode: TileMode.clamp,
-        )),
-        child: CurvedNavigationBar(
-            key: _bottomNavigationKey,
-            index: selectedIndex,
-            onTap: onTap,
-            animationCurve: Curves.decelerate,
-            animationDuration: Duration(milliseconds: 200),
-            height: 60,
-            color: Colors.transparent,
-            buttonBackgroundColor: Colors.transparent,
-            backgroundColor: Colors.transparent,
-            items: <Widget>[
-              Container(
-                padding: EdgeInsets.all(0),
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("assets/home.png"))),
-                  child: selectedIndex == 0
-                      ? Container(width: 150,height: 150,
-                        child: Image.asset("assets/ellipse.png",fit: BoxFit.cover))
-                      : Container()),
-              Image.asset("assets/youtube.png"),
-              Image.asset("assets/plus.png"),
-              Image.asset("assets/stacked-rectangles.png"),
-              Image.asset("assets/arrow-down.png"),
-            ]),
-      ),
+      bottomNavigationBar: CurvedNavigationBar(
+          key: _bottomNavigationKey,
+          index: selectedIndex,
+          onTap: onTap,
+          animationDuration: const Duration(milliseconds: 250),
+          height: 60,
+          letIndexChange: (value) => true,
+          color: Colors.black87.withOpacity(0.2),
+          buttonBackgroundColor: Colors.transparent,
+          backgroundColor: Colors.transparent,
+          items: <Widget>[
+            Container(
+                width: 50,
+                height: 50,
+                // ignore: prefer_const_constructors
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: const DecorationImage(
+                        image: AssetImage("assets/home.png"))),
+                child: selectedIndex == 0
+                    ? Container(
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: [
+                              const Color(0xffFF35B8).withOpacity(0.2),
+                              const Color(0xff09FACA).withOpacity(0.2)
+                            ]),
+                            shape: BoxShape.circle,
+                            border: const GradientBoxBorder(
+                                gradient: LinearGradient(colors: [
+                                  Color(0xffFF35B8),
+                                  Color(0xff09FACA)
+                                ]),
+                                width: 3)),
+                      )
+                    : Container()),
+            Container(
+                width: 50,
+                height: 50,
+                // ignore: prefer_const_constructors
+                decoration: BoxDecoration(
+                    image: const DecorationImage(
+                        image: AssetImage("assets/youtube.png"))),
+                child: selectedIndex == 1
+                    ? Container(
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: [
+                              const Color(0xffFF35B8).withOpacity(0.2),
+                              const Color(0xff09FACA).withOpacity(0.2)
+                            ]),
+                            shape: BoxShape.circle,
+                            border: const GradientBoxBorder(
+                                gradient: LinearGradient(colors: [
+                                  Color(0xffFF35B8),
+                                  Color(0xff09FACA)
+                                ]),
+                                width: 3)),
+                      )
+                    : Container()),
+            Image.asset("assets/plus.png"),
+            Image.asset("assets/stacked-rectangles.png"),
+            Image.asset("assets/arrow-down.png"),
+          ]),
     );
   }
 }
