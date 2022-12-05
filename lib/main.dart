@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:movie_app/provider/movie_provider.dart';
+import 'package:movie_app/screens/detail_page.dart';
 import 'package:movie_app/screens/home_page.dart';
 
 import 'package:provider/provider.dart';
@@ -56,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  final List<Widget> screens = [const HomePage()];
+  final List<Widget> screens = [ HomePage(),DetailPage()];
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   @override
