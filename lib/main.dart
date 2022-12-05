@@ -4,6 +4,8 @@ import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:movie_app/provider/movie_provider.dart';
 import 'package:movie_app/screens/detail_page.dart';
 import 'package:movie_app/screens/home_page.dart';
+import 'package:movie_app/screens/search_page.dart';
+import 'package:movie_app/screens/splash_page.dart';
 
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -57,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  final List<Widget> screens = [ HomePage(),DetailPage()];
+  final List<Widget> screens = [const HomePage()];
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   @override

@@ -2,12 +2,18 @@ import 'package:dio/dio.dart';
 import 'package:movie_app/model/credits_model.dart';
 import 'package:movie_app/model/movie_id_model.dart';
 import 'package:movie_app/model/popular_movie_model.dart';
+import 'package:movie_app/model/search_model.dart';
 import 'package:movie_app/model/top_rated_movie_model.dart';
 import 'package:movie_app/model/upcoming_movie_model.dart';
 
 final Dio _dio = Dio(
   BaseOptions(
     baseUrl: "https://api.themoviedb.org/3/movie/",
+  ),
+);
+final Dio _dioS = Dio(
+  BaseOptions(
+    baseUrl: "https://api.themoviedb.org/3/search/",
   ),
 );
 
@@ -85,6 +91,23 @@ Future<CreditIdResponse?> getCreditIdService(String? id) async {
     creditIdResponse = CreditIdResponse.fromJson(response.data);
 
     return creditIdResponse;
+  } catch (e) {
+    print(e);
+  }
+  return null;
+}
+
+Future<SearchMovieResponse?> getSearchMovieService(
+    {required String query}) async {
+  SearchMovieResponse? searchMovieResponse;
+  try {
+    final response = await _dioS.get(
+        "movie?api_key=3d8b2cb826b637834c4b40f266fef79a&language=en-USr&page=1&query=$query");
+    print("betul");
+
+    searchMovieResponse = SearchMovieResponse.fromJson(response.data);
+
+    return searchMovieResponse;
   } catch (e) {
     print(e);
   }

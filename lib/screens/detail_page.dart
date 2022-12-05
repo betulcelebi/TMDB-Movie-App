@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import '../provider/movie_provider.dart';
 
 class DetailPage extends StatefulWidget {
-   DetailPage({super.key, this.id});
+  DetailPage({super.key, this.id});
   final String? id;
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -104,7 +104,7 @@ class _DetailPageState extends State<DetailPage> {
                                           const TextStyle(color: Colors.white)),
                                   Image.asset("assets/dot.png"),
                                   Text(
-                                      "${provider.movieIdResponse?.genres?[0].name} - ${provider.movieIdResponse?.genres?[1].name}",
+                                      "${provider.movieIdResponse?.genres?[0].name}",
                                       style:
                                           const TextStyle(color: Colors.white)),
                                   Image.asset("assets/dot.png"),

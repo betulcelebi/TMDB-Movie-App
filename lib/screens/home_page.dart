@@ -1,13 +1,9 @@
-// ignore_for_file: use_full_hex_values_for_flutter_colors
-
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/provider/movie_provider.dart';
 import 'package:movie_app/screens/detail_page.dart';
+import 'package:movie_app/screens/search_page.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -86,20 +82,37 @@ class _HomePageState extends State<HomePage> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: const Color(0xff1fffffff)),
-                        child: TextField(
-                          cursorColor: Colors.grey,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                              prefixIcon: Image.asset("assets/search.png"),
-                              suffixIcon: Image.asset("assets/microphone.png"),
-                              border: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
-                              labelStyle: GoogleFonts.openSans(
-                                  color:
-                                      const Color(0xfffffffff).withOpacity(0.5),
-                                  fontSize: 17),
-                              labelText: "Search"),
+                        child: Consumer(
+                          builder: (context, MovieProvider provider, child) {
+                            return TextField(
+                              onTap: () {
+                                Navigator.push<void>(
+                                  context,
+                                  MaterialPageRoute<void>(
+                                    builder: (BuildContext context) => provider
+                                            .isLoadingSearch
+                                        ? const Center(
+                                            child: CircularProgressIndicator())
+                                        : SearchPage(),
+                                  ),
+                                );
+                              },
+                              cursorColor: Colors.grey,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                  prefixIcon: Image.asset("assets/search.png"),
+                                  suffixIcon:
+                                      Image.asset("assets/microphone.png"),
+                                  border: const OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10))),
+                                  labelStyle: GoogleFonts.openSans(
+                                      color: const Color(0xfffffffff)
+                                          .withOpacity(0.5),
+                                      fontSize: 17),
+                                  labelText: "Search"),
+                            );
+                          },
                         ),
                       ),
                       SizedBox(height: 3.h),
