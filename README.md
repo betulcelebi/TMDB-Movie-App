@@ -1,16 +1,9 @@
-# movie_app
 
-A new Flutter project.
 
-## Getting Started
+https://user-images.githubusercontent.com/44232805/206021198-f116f9c5-6aa2-412a-aa5c-54df7a5084d8.mp4
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+### TMDB Movie App
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+#### TMDB API Service: https://developers.themoviedb.org/3/movies/get-movie-details 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
