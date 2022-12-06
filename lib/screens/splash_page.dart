@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movie_app/main.dart';
 import 'package:movie_app/screens/home_page.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -20,11 +21,11 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   movieTo() async {
-    await Future.delayed(const Duration(seconds: 15), (() {
+    await Future.delayed(const Duration(seconds: 3), (() {
       Navigator.push<void>(
         context,
         MaterialPageRoute<void>(
-          builder: (BuildContext context) => const HomePage(),
+          builder: (BuildContext context) => const MyHomePage(title: '',),
         ),
       );
     }));
@@ -42,7 +43,7 @@ class _SplashPageState extends State<SplashPage> {
                 image: AssetImage("assets/splash-back.png"),
                 fit: BoxFit.cover)),
         child: Padding(
-          padding: const EdgeInsets.only(top: 110),
+          padding:  EdgeInsets.only(top: 13.75.h),
           child: Column(
             children: [
               GestureDetector(
@@ -50,29 +51,29 @@ class _SplashPageState extends State<SplashPage> {
                     Navigator.push<void>(
                       context,
                       MaterialPageRoute<void>(
-                        builder: (BuildContext context) => const HomePage(),
+                        builder: (BuildContext context) => const MyHomePage(title: '',),
                       ),
                     );
                   },
                   child: Image.asset("assets/avatar.png")),
-              SizedBox(height: 21),
+              SizedBox(height: 2.625.h),
               Container(
-                width: 308,
+                width: 38.5.h,
                 child: Text(
                   "Watch movies in Virtual Reality",
                   style: GoogleFonts.openSans(
-                      fontSize: 34,
+                      fontSize: 4.25.h,
                       fontWeight: FontWeight.w700,
                       color: Color(0xffFFFFFF)),
                   textAlign: TextAlign.center,
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 3.75.h),
               Container(
-                width: 276,
+                width: 34.5.h,
                 child: Text("Download and watch offline wherever you are",
                     style: GoogleFonts.openSans(
-                        fontSize: 16,
+                        fontSize: 2.h,
                         fontWeight: FontWeight.w400,
                         color: Color(0xffFFFFFF).withOpacity(0.75)),
                     textAlign: TextAlign.center),

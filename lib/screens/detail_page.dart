@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/utils/time_converter.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../provider/movie_provider.dart';
 
@@ -63,8 +64,8 @@ class _DetailPageState extends State<DetailPage> {
                             fit: BoxFit.cover,
                           ),
                           Positioned(
-                              bottom: 0,
-                              left: 310,
+                              bottom: 0.h,
+                              left: 38.75.h,
                               child: Image.asset("assets/play-button.png")),
                           // Positioned(
                           //   bottom: 16,
@@ -81,11 +82,11 @@ class _DetailPageState extends State<DetailPage> {
                       );
               },
             ),
-            const SizedBox(height: 5),
+            SizedBox(height: 0.625.h),
             Container(
               // color: Colors.grey,
-              width: 290,
-              height: 150,
+              width: 36.h,
+              height: 18.75.h,
               child: Consumer(
                 builder: (context, MovieProvider provider, child) {
                   return provider.isLoadingMovieId
@@ -100,25 +101,33 @@ class _DetailPageState extends State<DetailPage> {
                                 children: [
                                   Text(
                                       "${provider.movieIdResponse?.releaseDate?.split(" ").last.substring(0, 4)}",
-                                      style:
-                                          const TextStyle(color: Colors.white)),
+                                      style: GoogleFonts.openSans(
+                                          color: const Color(0xffFFFFFF)
+                                              .withOpacity(0.75),
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 13)),
                                   Image.asset("assets/dot.png"),
                                   Text(
                                       "${provider.movieIdResponse?.genres?[0].name}",
-                                      style:
-                                          const TextStyle(color: Colors.white)),
+                                      style: GoogleFonts.openSans(
+                                          color: const Color(0xffFFFFFF)
+                                              .withOpacity(0.75),
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 13)),
                                   Image.asset("assets/dot.png"),
                                   Text(
                                       TimeConvert().secondToHourAndSecond(
                                           provider.movieIdResponse?.runtime),
-                                      style: TextStyle(
+                                      style: GoogleFonts.openSans(
                                           color: const Color(0xffFFFFFF)
-                                              .withOpacity(0.75))),
+                                              .withOpacity(0.75),
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 13)),
                                 ],
                               ),
                               RatingBar.builder(
                                 glow: true,
-                                itemSize: 12,
+                                itemSize: 1.5.h,
                                 glowColor: Colors.white,
                                 unratedColor: Colors.white,
                                 initialRating: provider.movieIdResponse
@@ -128,7 +137,7 @@ class _DetailPageState extends State<DetailPage> {
                                 allowHalfRating: true,
                                 itemCount: 10,
                                 itemPadding:
-                                    const EdgeInsets.symmetric(horizontal: 3.0),
+                                    EdgeInsets.symmetric(horizontal: 0.375.h),
                                 itemBuilder: (context, _) => const Icon(
                                   Icons.star,
                                   color: Color(0xffF2A33A),
@@ -138,15 +147,14 @@ class _DetailPageState extends State<DetailPage> {
                                 },
                               ),
                               Container(
-                                height: 90,
+                                height: 11.25.h,
                                 child: Text(
-                                  "${provider.movieIdResponse?.overview}",
-                                  style: GoogleFonts.openSans(
-                                      color: Colors.white.withOpacity(0.75),
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w400),
-                                  textAlign: TextAlign.center,
-                                ),
+                                    "${provider.movieIdResponse?.overview}",
+                                    style: GoogleFonts.openSans(
+                                        color: Colors.white.withOpacity(0.75),
+                                        fontSize: 2.125.h,
+                                        fontWeight: FontWeight.w400),
+                                    textAlign: TextAlign.center),
                               )
                             ],
                           ),
@@ -154,94 +162,89 @@ class _DetailPageState extends State<DetailPage> {
                 },
               ),
             ),
-            const SizedBox(height: 19),
+            SizedBox(height: 2.375.h),
             Container(
-              width: 290,
-              height: 2,
+              width: 36.25.h,
+              height: 0.25.h,
               color: const Color(0xffFFFFFF).withOpacity(0.15),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 1.5.h),
             Padding(
-              padding: const EdgeInsets.only(right: 290),
+              padding: EdgeInsets.only(right: 36.25.h),
               child: Text("Casts",
                   style: GoogleFonts.openSans(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 2.5.h,
                       fontWeight: FontWeight.w700)),
             ),
             Padding(
-              padding: const EdgeInsets.all(15),
-              child: Container(
-                width: double.infinity,
-                height: 130,
-                child: GridView.builder(
-                  padding: const EdgeInsets.all(0),
-                  itemCount: 4,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisSpacing: 5,
-                      childAspectRatio: 2.6,
-                      crossAxisCount: 2),
-                  itemBuilder: (context, index) {
-                    return Consumer(
-                      builder: (context, MovieProvider provider, child) {
-                        return provider.isLoadingCreditId
-                            ? Center(child: CircularProgressIndicator())
-                            : Container(
-                                padding: const EdgeInsets.all(0),
-                                width: 159,
-                                height: 60,
-                                child: Row(
-                                  children: [
-                                    CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                          "$path${provider.creditIdResponse?.cast?[index].profilePath}"),
-                                      radius: 30,
-                                      backgroundColor: Colors.white,
-                                    ),
-                                    RotatedBox(
-                                      quarterTurns: 1,
-                                      child: Arc(
-                                          arcType: ArcType.CONVEY,
-                                          height: 6,
-
-                                          //clipShadows: [ClipShadow(color: Colors.white)],
-                                          child: Container(
-                                            margin: EdgeInsets.all(0),
-                                            width: 50,
-                                            height: 115,
-                                            decoration: const BoxDecoration(
-                                                color: Color.fromARGB(
-                                                    255, 69, 69, 69),
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(21),
-                                                    topRight:
-                                                        Radius.circular(21))),
-                                            child: RotatedBox(
-                                                quarterTurns: -1,
-                                                child: ListTile(
-                                                  //contentPadding: EdgeInsets.all(5 ),
-                                                  title: Text(
-                                                      "${provider.creditIdResponse?.cast?[index].name}",
-                                                      style:
-                                                          GoogleFonts.openSans(
-                                                              color: Color(
-                                                                  0xffFFFFFF),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                              fontSize: 13)),
-                                                )),
-                                          )),
-                                    )
-                                  ],
-                                ),
-                              );
-                      },
-                    );
-                  },
-                ),
-              ),
+              padding: EdgeInsets.all(1.875.h),
+              child:
+                  Consumer(builder: (context, MovieProvider provider, child) {
+                return provider.isLoadingCreditId
+                    ? Center(child: CircularProgressIndicator())
+                    : Container(
+                        width: double.infinity,
+                        height: 16.25.h,
+                        child: GridView.builder(
+                          padding: const EdgeInsets.all(0),
+                          itemCount: provider.creditIdResponse?.cast?.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisSpacing: 0.625.h,
+                                  childAspectRatio: 0.325.h,
+                                  crossAxisCount: 2),
+                          itemBuilder: (context, index) {
+                            return Container(
+                              padding: const EdgeInsets.all(0),
+                              width: 20.h,
+                              height: 7.5.h,
+                              child: Row(
+                                children: [
+                                  CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                        "$path${provider.creditIdResponse?.cast?[index].profilePath}"),
+                                    radius: 3.75.h,
+                                    backgroundColor: Colors.white,
+                                  ),
+                                  RotatedBox(
+                                    quarterTurns: 1,
+                                    child: Arc(
+                                        arcType: ArcType.CONVEY,
+                                        height: 0.75.h,
+                                        child: Container(
+                                          width: 6.25.h,
+                                          height: 14.4.h,
+                                          decoration: BoxDecoration(
+                                              color: Color.fromARGB(
+                                                  255, 69, 69, 69),
+                                              borderRadius: BorderRadius.only(
+                                                  topLeft:
+                                                      Radius.circular(2.625.h),
+                                                  topRight: Radius.circular(
+                                                      2.625.h))),
+                                          child: RotatedBox(
+                                              quarterTurns: -1,
+                                              child: ListTile(
+                                                //contentPadding: EdgeInsets.all(5 ),
+                                                title: Text(
+                                                    "${provider.creditIdResponse?.cast?[index].name}",
+                                                    style: GoogleFonts.openSans(
+                                                        color:
+                                                            Color(0xffFFFFFF),
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 1.625.h)),
+                                              )),
+                                        )),
+                                  )
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      );
+              }),
             )
           ],
         ),

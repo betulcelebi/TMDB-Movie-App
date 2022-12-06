@@ -62,8 +62,8 @@ class _SearchPageState extends State<SearchPage> {
                 return Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(
-                        top: 102,
+                      padding:  EdgeInsets.only(
+                        top: 12.75.h,
                       ),
                       child: Container(
                           alignment: Alignment.center,
@@ -74,14 +74,14 @@ class _SearchPageState extends State<SearchPage> {
                             "What would you like to watch?",
                             style: GoogleFonts.openSans(
                                 fontWeight: FontWeight.w700,
-                                fontSize: 28,
+                                fontSize: 3.5.h,
                                 color: Colors.white.withOpacity(0.85)),
                             textAlign: TextAlign.center,
                           )),
                     ),
                     SizedBox(height: 3.h),
                     Padding(
-                      padding: const EdgeInsets.only(left: 27),
+                      padding:  EdgeInsets.only(left: 3.375.h),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -90,9 +90,13 @@ class _SearchPageState extends State<SearchPage> {
                             width: 42.8.h,
                             height: 4.h,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(1.25.h),
                                 color: const Color(0xff1fffffff)),
                             child: TextField(
+                              style: GoogleFonts.openSans(
+                                  color:const Color(0xfffffffff)
+                                          .withOpacity(0.5),
+                                  fontSize: 1.75.h),
                               onChanged: (value) {
                                 if (value.isEmpty) {
                                   provider.getQueryData("g");
@@ -106,13 +110,13 @@ class _SearchPageState extends State<SearchPage> {
                                   prefixIcon: Image.asset("assets/search.png"),
                                   suffixIcon:
                                       Image.asset("assets/microphone.png"),
-                                  border: const OutlineInputBorder(
+                                  border:  OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
-                                          Radius.circular(10))),
+                                          Radius.circular(1.25.h ))),
                                   labelStyle: GoogleFonts.openSans(
                                       color: const Color(0xfffffffff)
                                           .withOpacity(0.5),
-                                      fontSize: 17),
+                                      fontSize: 2.125.h),
                                   labelText: "Search"),
                             ),
                           ),
@@ -122,12 +126,12 @@ class _SearchPageState extends State<SearchPage> {
                                   fontWeight: FontWeight.w400,
                                   color: const Color(0xfffffffff)
                                       .withOpacity(0.75),
-                                  fontSize: 17)),
-                          const SizedBox(
-                            height: 18,
+                                  fontSize: 2.125.h)),
+                           SizedBox(
+                            height: 2.25.h,
                           ),
                           SizedBox(
-                            height: 160,
+                            height: 20.h,
                             child: ListView.builder(
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
@@ -136,8 +140,8 @@ class _SearchPageState extends State<SearchPage> {
                               itemBuilder: (context, index) {
                                 return provider.isLoadingSearch
                                     ? Center(
-                                        child: const CircularProgressIndicator(
-                                        strokeWidth: 2,
+                                        child:  CircularProgressIndicator(
+                                        strokeWidth: 0.25.h,
                                       ))
                                     : InkWell(
                                         onTap: () {
@@ -152,9 +156,9 @@ class _SearchPageState extends State<SearchPage> {
                                         },
                                         child: Container(
                                           margin:
-                                              const EdgeInsets.only(right: 10),
-                                          width: 147,
-                                          height: 180,
+                                               EdgeInsets.only(right: 1.25.h),
+                                          width: 18.375.h,
+                                          height: 22.5.h,
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(20),
